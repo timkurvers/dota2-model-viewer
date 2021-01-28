@@ -1,4 +1,6 @@
+/dota
+/extract
 /node_modules/
 /public/*
 !/public/index.html
-/vrf/
+/vrf

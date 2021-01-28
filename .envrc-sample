@@ -1,0 +1,4 @@
+export DOTA2_DIR_VPK_PATH=/path/to/dota2/pak01_dir.vpk
+export PORT=3000
+export VRF_DECOMPILER_PATH=/path/to/vrf/decompiler
+export VRF_EXTRACT_PATH=./extract/
