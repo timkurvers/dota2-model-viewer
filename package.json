@@ -1,0 +1,11 @@
+{
+  "name": "@timkurvers/dota2-portraits",
+  "author": "Tim Kurvers <tim@moonsphere.net>",
+  "repository": "github:timkurvers/dota2-portraits",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {}
+}
