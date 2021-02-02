@@ -1,0 +1,15 @@
+{
+  "extends": "@timkurvers/eslint-config",
+  "env": {
+    "es2020": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "import/extensions": ["error", "always"],
+    "no-bitwise": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off"
+  }
+}
