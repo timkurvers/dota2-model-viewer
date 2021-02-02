@@ -7,8 +7,8 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "start": "node bin/app.js",
-    "start:dev": "nodemon npm run start"
+    "start": "node bin/pipeline.js",
+    "start:dev": "nodemon --watch src/pipeline npm run start"
   },
   "dependencies": {
     "express": "^4.17.1",
