@@ -1,7 +1,7 @@
 {
-  "name": "@timkurvers/dota2-portraits",
+  "name": "@timkurvers/dota2-model-viewer",
   "author": "Tim Kurvers <tim@moonsphere.net>",
-  "repository": "github:timkurvers/dota2-portraits",
+  "repository": "github:timkurvers/dota2-model-viewer",
   "license": "MIT",
   "private": true,
   "type": "module",

@@ -1,6 +1,8 @@
-# Dota 2 Portraits
+# Dota 2 Model Viewer
 
 ![Node Version](https://badgen.net/badge/node/14+/green)
+
+TODO.
 
 Various models in Dota 2 have a portrait animation / pose which is shown
 in the bottom part of the HUD on selection. Only models listed in Dota 2's
