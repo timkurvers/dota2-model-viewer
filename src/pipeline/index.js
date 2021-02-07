@@ -14,10 +14,6 @@ const vrf = new ValveResourceFormat(
   config.VRF_DECOMPILER_PATH,
   config.VRF_EXTRACT_PATH,
 );
-console.log('VRF decompiler version:', vrf.version);
-console.log('Path to extracted files:', vrf.extractPath);
-console.log('Path to pak01_dir.vpk:', vrf.dotaDirVPKPath);
-console.log();
 
 // Extract and normalize the Dota 2 portrait definitions
 const portraits = parseKeyValues(vrf.fetch('scripts/npc/portraits.txt')).Portraits;
