@@ -3,5 +3,6 @@
 /extract
 /node_modules/
 /public/*
-!/public/index.html
+!/public/portraits/
+!/public/portraits/*
 /vrf
