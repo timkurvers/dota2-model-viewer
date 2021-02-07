@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import ValveResourceFormat from './ValveResourceFormat.js';
 import config from './config.js';
 import parseKeyValues from './parseKeyValues.js';
+import webpackDevMiddleware from './middleware/webpack.js';
 
 const app = express();
 
@@ -27,6 +28,10 @@ const models = vrf.list({ extension: 'vmdl_c' }).map((model) => (
 ));
 
 app.use(morgan('dev'));
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(webpackDevMiddleware());
+}
 app.use(express.static('public'));
 
 // Lists all models
