@@ -3,6 +3,7 @@ const {
   PORT = 3000,
   VRF_DECOMPILER_PATH = '/path/to/vrf/Decompiler',
   VRF_EXTRACT_PATH = './extract/',
+  WEBPACK_MIDDLEWARE = false,
 } = process.env;
 
 export default {
@@ -10,4 +11,5 @@ export default {
   PORT,
   VRF_EXTRACT_PATH,
   VRF_DECOMPILER_PATH,
+  WEBPACK_MIDDLEWARE,
 };

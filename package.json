@@ -6,11 +6,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production webpack build",
+    "build": "webpack build",
     "build:clean": "rm -f public/{index.html,dota2*}",
     "lint": "eslint .",
-    "start": "NODE_ENV=production node bin/pipeline.js",
-    "start:dev": "nodemon --ignore src/web --ext js,cjs npm run start"
+    "start": "node bin/pipeline.js",
+    "start:dev": "WEBPACK_MIDDLEWARE=true nodemon --ignore src/web --ext js,cjs npm run start"
   },
   "dependencies": {
     "dat.gui": "^0.7.7",

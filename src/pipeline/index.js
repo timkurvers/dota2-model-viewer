@@ -25,7 +25,7 @@ const models = vrf.list({ extension: 'vmdl_c' }).map((model) => (
 
 app.use(morgan('dev'));
 
-if (process.env.NODE_ENV !== 'production') {
+if (config.WEBPACK_MIDDLEWARE === 'true') {
   app.use(webpackDevMiddleware());
 }
 app.use(express.static('public'));
