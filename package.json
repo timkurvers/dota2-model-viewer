@@ -9,6 +9,7 @@
     "build": "webpack build",
     "build:clean": "rm -f public/{index.html,dota2*}",
     "lint": "eslint .",
+    "screenshot": "node bin/screenshot.js",
     "start": "node bin/pipeline.js",
     "start:dev": "WEBPACK_MIDDLEWARE=true nodemon --ignore src/web --ext js,cjs npm run start"
   },
@@ -17,7 +18,9 @@
     "express": "^4.17.1",
     "mobx": "^6.1.4",
     "morgan": "^1.10.0",
-    "three": "^0.125.2"
+    "puppeteer": "^7.0.1",
+    "three": "^0.125.2",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

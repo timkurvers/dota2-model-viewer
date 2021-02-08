@@ -238,4 +238,6 @@ reaction(() => [
   if (query.has('debug')) {
     new DebugPanel(state, animations);
   }
+
+  document.dispatchEvent(new Event('model-viewer:ready'));
 })();
