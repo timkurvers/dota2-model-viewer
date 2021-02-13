@@ -21,7 +21,6 @@ let mixer = null;
 let background = null;
 
 const scene = new THREE.Scene();
-const clearColor = 0x000000;
 
 const camera = new THREE.PerspectiveCamera(
   state.camera.fov,
@@ -52,11 +51,17 @@ scene.add(spotlightHelper);
 const axesHelper = new THREE.AxesHelper(10000);
 scene.add(axesHelper);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({
+  alpha: true,
+  antialias: true,
+  preserveDrawingBuffer: true,
+});
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.setClearColor(clearColor);
+if (query.get('background') !== 'transparent') {
+  renderer.setClearColor(query.get('background') || 'black');
+}
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
