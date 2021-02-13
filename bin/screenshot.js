@@ -70,7 +70,7 @@ const screenshot = async (page, options, io = process.stdout) => {
   io.write('; loaded');
 
   await untilEvent(page, 'model-viewer:ready');
-  await page.screenshot({ path: output });
+  await page.screenshot({ path: output, omitBackground: true });
   io.write(`; screenshotted to ${output}\n`);
 };
 
