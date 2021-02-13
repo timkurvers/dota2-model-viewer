@@ -16,7 +16,6 @@ class SceneState {
     this.model = {
       animation: null,
       animate,
-      path: null,
       portrait: false,
     };
 
