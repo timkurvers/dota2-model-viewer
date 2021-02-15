@@ -64,8 +64,14 @@ class PortraitBackdrop extends THREE.CanvasTexture {
     );
     if (definition.PortraitBackgroundColor1) {
       this.blend.bl.fromString(definition.PortraitBackgroundColor1);
+    }
+    if (definition.PortraitBackgroundColor2) {
       this.blend.tl.fromString(definition.PortraitBackgroundColor2);
+    }
+    if (definition.PortraitBackgroundColor3) {
       this.blend.tr.fromString(definition.PortraitBackgroundColor3);
+    }
+    if (definition.PortraitBackgroundColor4) {
       this.blend.br.fromString(definition.PortraitBackgroundColor4);
     }
 
