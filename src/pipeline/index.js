@@ -64,7 +64,7 @@ app.get('/:model([a-zA-Z0-9/_-]+.vmdl).glb', (req, res) => {
 // Fetches primary texture for given material
 app.get('/:material([a-zA-Z0-9/_-]+.vmat).png', (req, res) => {
   const { material } = req.params;
-  const kv = parseKeyValues(vrf.fetch(material));
+  const kv = parseKeyValues(vrf.fetch(material.toLowerCase()));
   // TODO: Is it always called Layer0?
   const texture = vrf.fetch(kv.Layer0.g_tColor);
   res.contentType('image/png');
