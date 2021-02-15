@@ -220,10 +220,9 @@ reaction(() => [
       animations.find((a) => a.name.includes('portrait'))
       || animations.find((a) => a.name === 'idle')
       || animations.find((a) => a.name.includes('idle'))
-    );
-    if (clip) {
-      state.model.animation = clip.name;
-    }
+      || animations.find((a) => a.name.includes('capture'))
+    ) || animations[0];
+    state.model.animation = clip.name;
   }
 
   // Attempt loading portrait definition (camera angles, lights etc.)
