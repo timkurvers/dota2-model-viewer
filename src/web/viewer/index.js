@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { reaction } from 'mobx';
 
 import DebugPanel from './DebugPanel.js';
+import PortraitBackdrop from './PortraitBackdrop.js';
 import SceneState from './SceneState.js';
 import { RADIANS_TO_DEGREES } from './utils.js';
 
@@ -15,10 +16,12 @@ const model = query.get('model') || 'models/creeps/roshan/roshan.vmdl';
 // Holds camera position/rotation, lights, whether to animate etc.
 const state = new SceneState(query);
 
+// Holds portrait backdrop texture (if any)
+const backdrop = new PortraitBackdrop();
+
 const clock = new THREE.Clock();
 let animations = [];
 let mixer = null;
-let background = null;
 
 const scene = new THREE.Scene();
 
@@ -104,7 +107,7 @@ reaction(() => state.model.portrait, (portrait) => {
   if (portrait) {
     controls.saveState();
     controls.enabled = false;
-    scene.background = background;
+    scene.background = backdrop;
   } else {
     controls.reset();
     controls.enabled = true;
@@ -227,14 +230,8 @@ reaction(() => [
   const response = await fetch(`portraits/${model}.json`);
   if (response.ok) {
     const definition = await response.json();
-    state.loadPortraitDefinition(definition);
-
-    // Load portrait background texture (if any)
-    if (definition.PortraitBackgroundTexture) {
-      background = await new THREE.TextureLoader().loadAsync(
-        `${definition.PortraitBackgroundTexture}.png`,
-      );
-    }
+    await state.loadPortraitDefinition(definition);
+    await backdrop.loadPortraitDefinition(definition);
 
     // Enter portrait mode when requested to do so
     state.model.portrait = query.has('portrait');
