@@ -76,6 +76,20 @@ For simplicity's sake the pipeline server also serves up the web client from the
 
 Soon.
 
+## Known issues
+
+- Heroes and other units lack attachments, such as weapons, armor, and sometimes
+  even their heads.
+
+- Models are not correctly shaded nor lit in comparison to [ValveResourceFormat]'s
+  rendering. In particular: specular, rim and directional ambient lighting are missing.
+
+- The portrait animation gets chosen based on a pattern matching heuristic, as
+  opposed to retrieving the right one directly from the Dota 2 game files.
+
+- Only portraits listed in Dota 2's internal game file `scripts/npc/portraits.txt`
+  are currently supported.
+
 # Development
 
 Dota 2 Model Viewer is written in [ES2020+], powered by [MobX], controllable using
