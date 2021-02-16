@@ -101,6 +101,8 @@ Run the pipeline server in development mode to automatically monitor source file
 npm run start:dev
 ```
 
+Contributions more than welcome!
+
 # Legalese
 
 - Dota 2 is a registered trademark of [Valve Corporation].
