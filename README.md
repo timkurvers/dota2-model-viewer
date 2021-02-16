@@ -76,6 +76,19 @@ For simplicity's sake the pipeline server also serves up the web client from the
 
 Soon.
 
+## Portrait pages
+
+To quickly find portraits for various units, Dota 2 Model Viewer ships with a few
+pre-made portrait pages. Make sure to change host/port accordingly.
+
+- Selection of units: http://localhost:3000/portraits/index.html
+- Selection of couriers: http://localhost:3000/portraits/couriers.html
+- Lane creeps: http://localhost:3000/portraits/lane-creeps.html
+- Neutral creeps: http://localhost:3000/portraits/neutral-creeps.html
+- Structures: http://localhost:3000/portraits/structures.html
+- Summons: http://localhost:3000/portraits/summons.html
+- Wards: http://localhost:3000/portraits/wards.html
+
 ## Known issues
 
 - Heroes and other units lack attachments, such as weapons, armor, and sometimes
