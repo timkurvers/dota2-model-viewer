@@ -106,6 +106,16 @@ To quickly find portraits for various units, use the pre-made portrait pages:
 - Summons: http://localhost:3000/portraits/summons.html
 - Wards: http://localhost:3000/portraits/wards.html
 
+## Screenshots
+
+To generate a screenshot use the bundled screenshot-command:
+
+```shell
+npm run screenshot model models/creeps/roshan/roshan.vmdl screenshots/roshan.png -- --portrait --width 250 --height 250
+```
+
+For a full overview of options, see its help: `npm run screenshot`.
+
 ## Known issues
 
 - Heroes and other units lack attachments, such as weapons, armor, and sometimes
