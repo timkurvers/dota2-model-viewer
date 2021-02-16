@@ -74,12 +74,29 @@ For simplicity's sake the pipeline server also serves up the web client from the
 
 # Usage
 
-Soon.
+Instruct the viewer which model to load using the `model` query parameter:
+
+http://localhost:3000/?model=models/creeps/roshan/roshan.vmdl
+
+Visit http://localhost:3000/models.json for a list of available models.
+
+Other query parameters:
+
+- `animate`: set to `false` to disable animations.
+- `background`: sets scene background color; must be one of:
+  - `transparent`
+  - a named color (e.g. `red`)
+  - a URL-encoded hex triplet (e.g. `%23FF0000`)
+- `debug`: enables a debug panel to allow fine-grained control of the scene.
+- `helpers`: enables axes, grid and lighting visual helpers.
+- `portrait`: renders the model in portrait mode with a backdrop.
+
+When the model viewer is not in portrait mode, freely rotate the camera using the
+left mouse button, and pan using the right mouse button.
 
 ## Portrait pages
 
-To quickly find portraits for various units, Dota 2 Model Viewer ships with a few
-pre-made portrait pages. Make sure to change host/port accordingly.
+To quickly find portraits for various units, use the pre-made portrait pages:
 
 - Selection of units: http://localhost:3000/portraits/index.html
 - Selection of couriers: http://localhost:3000/portraits/couriers.html
