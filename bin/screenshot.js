@@ -111,19 +111,33 @@ yargs(hideBin(process.argv))
   })
 
   // Single model screenshot command
-  .command('model <file> <output>', 'Screenshots given single model.', () => {}, (yargv) => {
+  .command('model <file> <output>', 'Screenshots given single model.', (yargv) => {
+    yargv
+      .positional('file', { describe: 'Model to load.' })
+      .positional('output', { describe: 'Output file with format inferred from extension.' })
+      .example('$0 model models/creeps/roshan/roshan.vmdl roshan.png')
+      .example('$0 model model.vmdl model.png -- --portrait -w 235 -h 272');
+  }, (yargv) => {
     const options = { ...yargv, model: yargv.file };
     return withPuppeteer(async (page) => {
       await screenshot(page, options);
     }, options);
   })
-  .example('$0 model models/creeps/roshan/roshan.vmdl roshan.png')
-  .example('$0 model model.vmdl model.png -- --portrait -w 235 -h 272')
 
   // Batch screenshots command
-  .command('batch <file> [output]', 'Screenshots entries from given batch file.', () => {}, (yargv) => {
+  .command('batch <file> [output]', 'Screenshots entries from given batch file.', (yargv) => {
+    yargv
+      .positional('file', { describe: 'Batch file to load. See format below.' })
+      .positional('output', { describe: 'Output directory.', default: '.' })
+      .example('$0 batch entries.txt -- --portrait --no-headless')
+      .epilogue(stripIndent`
+        Batch file text format:
+          models/courier/navi_courier/navi_courier_flying.vmdl: navi-courier.png
+          models/creeps/roshan/roshan.vmdl: roshan.png
+      `);
+  }, (yargv) => {
     const options = yargv;
-    const { output = '.' } = options;
+    const { output } = options;
     const entries = fs.readFileSync(options.file, 'utf8').trim().split(/\r?\n/);
     return withPuppeteer(async (page) => {
       for (const entry of entries) {
@@ -134,12 +148,6 @@ yargs(hideBin(process.argv))
       }
     }, options);
   })
-  .example('$0 batch entries.txt -- --portrait --no-headless')
-  .epilogue(stripIndent`
-    Batch file text format:
-      models/courier/navi_courier/navi_courier_flying.vmdl: navi-courier.png
-      models/creeps/roshan/roshan.vmdl: roshan.png
-  `)
 
   .demandCommand(1, '')
   .strict()
