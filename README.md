@@ -109,12 +109,19 @@ To quickly find portraits for various units, use the pre-made portrait pages:
 - Summons: http://localhost:3000/portraits/summons.html
 - Wards: http://localhost:3000/portraits/wards.html
 
-## Screenshots
+## Batch screenshots
 
-To generate a screenshot use the bundled screenshot-command:
+To easily screenshot multiple models, create a batch-file:
+
+```
+model=models/creeps/roshan/roshan.vmdl: roshan.png
+model=models/courier/navi_courier/navi_courier_flying.vmdl&portrait: navi-courier.png
+```
+
+Now pass this file as an argument to the bundled screenshot-command:
 
 ```shell
-npm run screenshot model models/creeps/roshan/roshan.vmdl screenshots/roshan.png -- --portrait --width 250 --height 250
+npm run screenshot batch.txt screenshots/ -- --width 250 --height 250
 ```
 
 For a full overview of options, see its help: `npm run screenshot`.

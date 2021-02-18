@@ -27,25 +27,6 @@ const untilEvent = async (page, event, timeout = 15000) => (
   })
 );
 
-// Generates a model viewer URL from provided options
-const generateModelViewerURL = (options) => {
-  const url = new URL(options.url);
-  const params = url.searchParams;
-  if (options.model) {
-    params.set('model', options.model);
-  }
-  if (options.helpers) {
-    params.set('helpers', '');
-  }
-  if (options.material) {
-    params.set('material', options.material);
-  }
-  if (options.portrait) {
-    params.set('portrait', options.portrait === true ? '' : options.portrait);
-  }
-  return url.toString();
-};
-
 // Executes given block within a puppeteer context
 const withPuppeteer = async (block, { width, height, headless = true } = {}) => {
   const browser = await puppeteer.launch({
@@ -65,41 +46,25 @@ const withPuppeteer = async (block, { width, height, headless = true } = {}) => 
 
 // Screenshots given URL after instructing page to navigate to it
 const screenshot = async (page, options, io = process.stdout) => {
-  const { model, output } = options;
-  const url = generateModelViewerURL(options);
-  io.write(`processing: ${model}`);
+  const { output, params } = options;
+
+  const url = new URL(`${options.url}?${params}`);
+  io.write(`processing: ${params}`);
 
   await page.goto(url);
-  io.write('; loaded');
+  io.write(' ...');
 
   await untilEvent(page, 'model-viewer:ready');
   await page.screenshot({ path: output, omitBackground: true });
-  io.write(`; screenshotted to ${output}\n`);
+  io.write(`\b\b\b=> ${output}\n`);
 };
 
 yargs(hideBin(process.argv))
   .scriptName('npm run screenshot')
-
-  // Model viewer options
-  .group(['helpers', 'portrait', 'url'], 'Model viewer options:')
-  .option('helpers', {
-    boolean: true,
-    default: false,
-    describe: 'Enables scene helpers.',
-  })
-  .option('material', {
-    describe: 'Override primary material.',
-  })
-  .option('portrait', {
-    describe: 'Enforces portrait mode, optionally using the given definition.',
-  })
   .option('url', {
     default: `http://localhost:${config.PORT}`,
     describe: 'Base URL to the pipeline & model viewer.',
   })
-
-  // Processing options
-  .group(['width', 'height', 'headless'], 'Processing options:')
   .option('width', {
     alias: 'w',
     default: 1000,
@@ -116,30 +81,15 @@ yargs(hideBin(process.argv))
     describe: 'Whether to launch a headless or full version of Chromium.',
   })
 
-  // Single model screenshot command
-  .command('model <file> <output>', 'Screenshots given single model.', (yargv) => {
-    yargv
-      .positional('file', { describe: 'Model to load.' })
-      .positional('output', { describe: 'Output file with format inferred from extension.' })
-      .example('$0 model models/creeps/roshan/roshan.vmdl roshan.png')
-      .example('$0 model model.vmdl model.png -- --portrait -w 235 -h 272');
-  }, (yargv) => {
-    const options = { ...yargv, model: yargv.file };
-    return withPuppeteer(async (page) => {
-      await screenshot(page, options);
-    }, options);
-  })
-
-  // Batch screenshots command
-  .command('batch <file> [output]', 'Screenshots entries from given batch file.', (yargv) => {
+  .command('$0 <file> [output]', 'Screenshots entries from given batch file.', (yargv) => {
     yargv
       .positional('file', { describe: 'Batch file to load. See format below.' })
       .positional('output', { describe: 'Output directory.', default: '.' })
-      .example('$0 batch entries.txt -- --portrait --no-headless')
+      .example('$0 batch entries.txt -- -w 235 -h 272 --no-headless')
       .epilogue(stripIndent`
         Batch file text format:
-          models/courier/navi_courier/navi_courier_flying.vmdl: navi-courier.png
-          models/creeps/roshan/roshan.vmdl: roshan.png
+          model=models/creeps/roshan/roshan.vmdl: roshan.png
+          model=models/creeps/roshan/roshan.vmdl&portrait: roshan-portrait.png
       `);
   }, (yargv) => {
     const options = yargv;
@@ -147,15 +97,13 @@ yargs(hideBin(process.argv))
     const entries = fs.readFileSync(options.file, 'utf8').trim().split(/\r?\n/);
     return withPuppeteer(async (page) => {
       for (const entry of entries) {
-        const [model, outfile] = entry.trim().split(/:\s+/);
-        options.model = model;
+        const [params, outfile] = entry.trim().split(/:\s+/);
+        options.params = params;
         options.output = path.join(output, outfile);
         await screenshot(page, options);
       }
     }, options);
   })
-
-  .demandCommand(1, '')
   .strict()
   .help(false)
   .version(false)
