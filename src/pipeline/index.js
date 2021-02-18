@@ -40,8 +40,8 @@ app.get('/portraits.json', (_, res) => {
   res.send(portraits);
 });
 
-// Fetches the portrait definition (if any) for given VMDL model
-app.get('/portraits/:model([a-zA-Z0-9/_-]+.vmdl).json', (req, res) => {
+// Fetches the portrait definition (if any) for given model or identifier
+app.get('/portraits/:model([a-zA-Z0-9/._-]+).json', (req, res) => {
   const { model } = req.params;
   if (model in portraits) {
     res.send(portraits[model]);

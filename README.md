@@ -85,11 +85,13 @@ Other query parameters:
 - `animate`: set to `false` to disable animations.
 - `background`: sets scene background color; must be one of:
   - `transparent`
-  - a named color (e.g. `red`)
-  - a URL-encoded hex triplet (e.g. `%23FF0000`)
+  - a named color, e.g. `red`.
+  - a URL-encoded hex triplet, e.g. `%23FF0000`.
 - `debug`: enables a debug panel to allow fine-grained control of the scene.
 - `helpers`: enables axes, grid and lighting visual helpers.
-- `portrait`: renders the model in portrait mode with a backdrop.
+- `portrait`: renders the model in portrait mode with a backdrop; supports two modes:
+  - present but without a value, defaults to matching the model rendered.
+  - with an explicit value, e.g. `default_courier`.
 
 When the model viewer is not in portrait mode, freely rotate the camera using the
 left mouse button, and pan using the right mouse button.

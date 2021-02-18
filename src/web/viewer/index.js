@@ -226,7 +226,8 @@ reaction(() => [
   }
 
   // Attempt loading portrait definition (camera angles, lights etc.)
-  const response = await fetch(`portraits/${model}.json`);
+  const portrait = query.get('portrait') || model;
+  const response = await fetch(`portraits/${portrait}.json`);
   if (response.ok) {
     const definition = await response.json();
     await state.loadPortraitDefinition(definition);

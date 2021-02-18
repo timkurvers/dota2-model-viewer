@@ -38,7 +38,7 @@ const generateModelViewerURL = (options) => {
     params.set('helpers', '');
   }
   if (options.portrait) {
-    params.set('portrait', '');
+    params.set('portrait', options.portrait === true ? '' : options.portrait);
   }
   return url.toString();
 };
@@ -85,9 +85,7 @@ yargs(hideBin(process.argv))
     describe: 'Enables scene helpers.',
   })
   .option('portrait', {
-    boolean: true,
-    default: false,
-    describe: 'Enforce portrait mode.',
+    describe: 'Enforces portrait mode, optionally using the given definition.',
   })
   .option('url', {
     default: `http://localhost:${config.PORT}`,
