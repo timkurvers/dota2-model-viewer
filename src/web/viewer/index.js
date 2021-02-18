@@ -233,6 +233,15 @@ reaction(() => [
     await state.loadPortraitDefinition(definition);
     await backdrop.loadPortraitDefinition(definition);
 
+    // Override material (if any)
+    const material = query.get('material');
+    if (material && primary.material) {
+      primary.material.map.image = await new THREE.ImageLoader().loadAsync(
+        `${material}.png`,
+      );
+      primary.material.map.needsUpdate = true;
+    }
+
     // Enter portrait mode when requested to do so
     state.model.portrait = query.has('portrait');
   }

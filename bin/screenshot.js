@@ -37,6 +37,9 @@ const generateModelViewerURL = (options) => {
   if (options.helpers) {
     params.set('helpers', '');
   }
+  if (options.material) {
+    params.set('material', options.material);
+  }
   if (options.portrait) {
     params.set('portrait', options.portrait === true ? '' : options.portrait);
   }
@@ -83,6 +86,9 @@ yargs(hideBin(process.argv))
     boolean: true,
     default: false,
     describe: 'Enables scene helpers.',
+  })
+  .option('material', {
+    describe: 'Override primary material.',
   })
   .option('portrait', {
     describe: 'Enforces portrait mode, optionally using the given definition.',

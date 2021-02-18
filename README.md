@@ -89,6 +89,7 @@ Other query parameters:
   - a URL-encoded hex triplet, e.g. `%23FF0000`.
 - `debug`: enables a debug panel to allow fine-grained control of the scene.
 - `helpers`: enables axes, grid and lighting visual helpers.
+- `material`: overrides primary material.
 - `portrait`: renders the model in portrait mode with a backdrop; supports two modes:
   - present but without a value, defaults to matching the model rendered.
   - with an explicit value, e.g. `default_courier`.
