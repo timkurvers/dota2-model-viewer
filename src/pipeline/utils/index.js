@@ -1,5 +1,7 @@
 import path from 'path';
 
+export { default as MurmurHash } from './MurmurHash.js';
+
 export const changeExtension = (fqpath, extension) => {
   const current = path.extname(fqpath);
   if (extension && current !== extension) {

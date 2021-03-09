@@ -2,7 +2,7 @@ import childProcess from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-import { changeExtension } from './utils.js';
+import { changeExtension } from './utils/index.js';
 
 const CONVERSIONS = {
   '.vmdl': '.glb',

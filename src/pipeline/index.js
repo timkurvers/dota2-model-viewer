@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 
+import MurmurHash from './utils/MurmurHash.js';
 import ValveResourceFormat from './ValveResourceFormat.js';
 import config from './config.js';
 import parseKeyValues from './parseKeyValues.js';
@@ -33,6 +34,19 @@ app.use(express.static('public'));
 // Lists all models
 app.get('/models.json', (_, res) => {
   res.send(models);
+});
+
+// Fetches model with given ID, a Murmur resource hash
+app.get('/models/:id(\\d+)n?.json', (req, res) => {
+  const bid = BigInt(req.params.id);
+  for (const model of models) {
+    const hash = MurmurHash.hash64(model);
+    if (hash === bid) {
+      res.send({ model });
+      return;
+    }
+  }
+  res.status(404).send({ model: null });
 });
 
 // Lists all known portrait definitions

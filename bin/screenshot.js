@@ -10,7 +10,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers'; // eslint-disable-line
 
 import config from '../src/pipeline/config.js';
-import { stripIndent } from '../src/pipeline/utils.js';
+import { stripIndent } from '../src/pipeline/utils/index.js';
 
 // Waits for page to dispatch requested event within given timeout duration
 // Adapted from: https://github.com/puppeteer/puppeteer/issues/2455
