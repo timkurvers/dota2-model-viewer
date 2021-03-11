@@ -186,15 +186,28 @@ reaction(() => [
   const gltf = await loader.loadAsync(`${model}.glb`);
   scene.add(gltf.scene);
 
-  // Exported models occasionally include multiple LoD variations. Since this
-  // is not exposed in the glTF format, we hide all but the primary mesh (for now)
-  let primary = scene.getObjectByProperty('type', 'SkinnedMesh');
-  for (const child of gltf.scene.children) {
-    child.visible = false;
+  // Exported models occasionally include multiple LoD variations or gear. This
+  // is unfortunately not exposed in the glTF format exported by VRF, so we do
+  // our best to find the correct primary mesh and hide the rest, for now.
+  let primary = null;
+
+  // Primary mesh specified using URL param
+  if (query.has('primaryMesh')) {
+    primary = scene.getObjectByName(query.get('primaryMesh'));
   }
 
+  // Find first SkinnedMesh as primary mesh
+  if (!primary) {
+    primary = gltf.scene.getObjectByProperty('type', 'SkinnedMesh');
+  }
+
+  // Assume first child is primary mesh
   if (!primary) {
     [primary] = gltf.scene.children;
+  }
+
+  for (const child of gltf.scene.children) {
+    child.visible = false;
   }
   primary.visible = true;
   primary.traverseAncestors((ancestor) => {

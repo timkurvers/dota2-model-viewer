@@ -93,6 +93,7 @@ Other query parameters:
 - `portrait`: renders the model in portrait mode with a backdrop; supports two modes:
   - present but without a value, defaults to matching the model rendered.
   - with an explicit value, e.g. `default_courier`.
+- `primaryMesh`: name of the mesh to render.
 
 When the model viewer is not in portrait mode, freely rotate the camera using the
 left mouse button, and pan using the right mouse button.
