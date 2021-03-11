@@ -54,8 +54,18 @@ class PortraitBackdrop extends THREE.CanvasTexture {
     ctx.putImageData(imgdata, 0, 0);
   }
 
+  paintDefault() {
+    const canvas = this.image;
+    const { width, height } = canvas;
+
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, width, height);
+  }
+
   async loadPortraitDefinition(definition) {
     if (!definition.PortraitBackgroundTexture) {
+      this.paintDefault();
       return;
     }
 
