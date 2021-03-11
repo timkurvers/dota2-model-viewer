@@ -263,5 +263,7 @@ reaction(() => [
     new DebugPanel(state, animations);
   }
 
-  document.dispatchEvent(new Event('model-viewer:ready'));
+  setTimeout(() => {
+    document.dispatchEvent(new Event('model-viewer:ready'));
+  }, 250);
 })();
