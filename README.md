@@ -70,7 +70,8 @@ For simplicity's sake the pipeline server also serves up the web client from the
 
    **Disclaimer:** The pipeline serves up resources to the browser over HTTP. Depending
    on your network configuration these may be available to others. Respect laws and
-   do not distribute game data you do not own.
+   do not distribute game data you do not own. This also includes content extracted
+   or placed into the folder indicated by `VRF_EXTRACT_PATH`.
 
 # Usage
 

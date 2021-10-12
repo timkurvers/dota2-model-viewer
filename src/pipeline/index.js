@@ -31,6 +31,11 @@ if (config.WEBPACK_MIDDLEWARE === 'true') {
 }
 app.use(express.static('public'));
 
+// The latest VRF version no longer supports bundling textures into a single GLB
+// model file, but rather places these auxiliary files right next to it. To allow
+// the model viewer to access these files, we expose this folder fully.
+app.use(express.static(config.VRF_EXTRACT_PATH));
+
 // Lists all models
 app.get('/models.json', (_, res) => {
   res.send(models);
