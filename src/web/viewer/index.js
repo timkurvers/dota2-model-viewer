@@ -13,7 +13,7 @@ import { RADIANS_TO_DEGREES } from './utils.js';
 const query = new URLSearchParams(document.location.search);
 const model = query.get('model') || 'models/creeps/roshan/roshan.vmdl';
 
-// Holds camera position/rotation, lights, whether to animate etc.
+// Holds portrait camera position/rotation, lights, whether to animate etc.
 const state = new SceneState(query);
 
 // Holds portrait backdrop texture (if any)
@@ -25,13 +25,23 @@ let mixer = null;
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(
-  state.camera.fov,
-  window.innerWidth / window.innerHeight,
-  state.camera.near,
-  state.camera.far,
-);
-camera.rotation.order = 'YXZ';
+const aspect = window.innerWidth / window.innerHeight;
+
+// Holds a controllable main camera as well as a portrait camera
+const cameras = {
+  main: new THREE.PerspectiveCamera(
+    27, aspect, 0.1, 2000,
+  ),
+  portrait: new THREE.PerspectiveCamera(
+    state.camera.fov, aspect, state.camera.near, state.camera.far,
+  ),
+};
+cameras.portrait.rotation.order = 'YXZ';
+scene.add(cameras.main);
+scene.add(cameras.portrait);
+
+// Default to controllable camera
+let camera = cameras.main;
 camera.position.set(12, 12, 12);
 
 // TODO: Proper ambient lighting according to Valve's engine
@@ -54,6 +64,9 @@ scene.add(spotlightHelper);
 const axesHelper = new THREE.AxesHelper(10000);
 scene.add(axesHelper);
 
+const cameraHelper = new THREE.CameraHelper(cameras.portrait);
+scene.add(cameraHelper);
+
 const renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true,
@@ -75,18 +88,25 @@ renderer.setAnimationLoop(() => {
   if (mixer) {
     mixer.update(state.model.animate ? clock.getDelta() : undefined);
   }
-  spotlightHelper.update();
+  if (state.helpers.spotlight) {
+    spotlightHelper.update();
+  }
+  if (state.helpers.camera) {
+    cameraHelper.update();
+  }
   renderer.render(scene, camera);
 });
 renderer.render(scene, camera);
 
-const controls = new OrbitControls(camera, canvas);
+const controls = new OrbitControls(cameras.main, canvas);
 controls.update();
 
 window.addEventListener('resize', () => {
   const { innerWidth: width, innerHeight: height } = window;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
+  cameras.main.aspect = width / height;
+  cameras.main.updateProjectionMatrix();
+  cameras.portrait.aspect = width / height;
+  cameras.portrait.updateProjectionMatrix();
   renderer.setSize(width, height);
 }, false);
 
@@ -105,34 +125,31 @@ reaction(() => state.model.animate, () => {
 
 reaction(() => state.model.portrait, (portrait) => {
   if (portrait) {
-    controls.saveState();
+    camera = cameras.portrait;
     controls.enabled = false;
     scene.background = backdrop;
   } else {
-    controls.reset();
+    camera = cameras.main;
     controls.enabled = true;
     scene.background = null;
   }
 });
 
 reaction(() => [
-  state.model.portrait,
   state.camera.position.normalized,
   state.camera.rotation.normalized,
-], ([portrait, position, rotation]) => {
-  if (portrait) {
-    camera.position.set(...position);
-    camera.rotation.set(...rotation);
-  }
+], ([position, rotation]) => {
+  cameras.portrait.position.set(...position);
+  cameras.portrait.rotation.set(...rotation);
 });
 
 reaction(() => [
   state.camera.fov, state.camera.far, state.camera.near,
 ], ([fov, far, near]) => {
-  camera.fov = fov;
-  camera.far = far;
-  camera.near = near;
-  camera.updateProjectionMatrix();
+  cameras.portrait.fov = fov;
+  cameras.portrait.far = far;
+  cameras.portrait.near = near;
+  cameras.portrait.updateProjectionMatrix();
 });
 
 reaction(() => [
@@ -174,10 +191,12 @@ reaction(() => [
   state.helpers.axes,
   state.helpers.grid,
   state.helpers.spotlight && state.lights.spotlight.visible,
-], ([showAxesHelper, showGridHelper, showSpotlightHelper]) => {
+  state.helpers.camera,
+], ([showAxesHelper, showGridHelper, showSpotlightHelper, showCameraHelper]) => {
   axesHelper.visible = showAxesHelper;
   gridHelper.visible = showGridHelper;
   spotlightHelper.visible = showSpotlightHelper;
+  cameraHelper.visible = showCameraHelper;
 }, { fireImmediately: true });
 
 (async () => {

@@ -36,6 +36,7 @@ class SceneState {
       axes: query.has('helpers'),
       grid: query.has('helpers'),
       spotlight: query.has('helpers'),
+      camera: query.has('helpers'),
     };
 
     makeAutoObservable(this);

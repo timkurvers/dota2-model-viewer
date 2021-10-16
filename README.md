@@ -81,15 +81,19 @@ http://localhost:3000/?model=models/creeps/roshan/roshan.vmdl
 
 Visit http://localhost:3000/models.json for a list of available models.
 
-Other query parameters:
+To experiment freely with the scene, enable the debug panel:
+
+http://localhost:3000/?model=models/creeps/roshan/roshan.vmdl&debug
+
+All query parameters:
 
 - `animate`: set to `false` to disable animations.
 - `background`: sets scene background color; must be one of:
   - `transparent`
   - a named color, e.g. `red`.
   - a URL-encoded hex triplet, e.g. `%23FF0000`.
-- `debug`: enables a debug panel to allow fine-grained control of the scene.
-- `helpers`: enables axes, grid and lighting visual helpers.
+- `debug`: enables the debug panel to allow fine-grained control of the scene.
+- `helpers`: enables axes, grid, lighting and portrait camera visual helpers.
 - `material`: overrides primary material.
 - `portrait`: renders the model in portrait mode with a backdrop; supports two modes:
   - present but without a value, defaults to matching the model rendered.
