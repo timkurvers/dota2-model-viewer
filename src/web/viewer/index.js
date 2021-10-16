@@ -19,7 +19,7 @@ const state = new SceneState(query);
 // Holds portrait backdrop texture (if any)
 const backdrop = new PortraitBackdrop();
 
-const clock = new THREE.Clock();
+const clock = new THREE.Clock(false);
 let animations = [];
 let mixer = null;
 
@@ -119,8 +119,15 @@ reaction(() => state.model.animation, (name) => {
   }
 });
 
-reaction(() => state.model.animate, () => {
-  mixer.setTime(0);
+reaction(() => state.model.animate, (animate) => {
+  if (mixer) {
+    mixer.setTime(0);
+  }
+  if (animate) {
+    clock.start();
+  } else {
+    clock.stop();
+  }
 });
 
 reaction(() => state.model.portrait, (portrait) => {
