@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "dat.gui": "^0.7.7",
+    "debug": "^4.3.2",
     "express": "^4.17.1",
     "mobx": "^6.1.4",
     "morgan": "^1.10.0",
     "puppeteer": "^7.0.1",
-    "three": "^0.125.2",
+    "three": "^0.133.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
