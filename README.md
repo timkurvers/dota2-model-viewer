@@ -142,6 +142,9 @@ For a full overview of options, see its help: `npm run screenshot`.
 - Only portraits listed in Dota 2's internal game file `scripts/npc/portraits.txt`
   are currently supported.
 
+- To debug the [ValveResourceFormat] decompiler, set the `DEBUG` environment variable
+  to `vrf:*`, for example: `DEBUG=vrf:* npm run start`.
+
 # Development
 
 Dota 2 Model Viewer is written in [ES2020+], powered by [MobX], controllable using

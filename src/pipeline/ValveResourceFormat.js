@@ -1,4 +1,5 @@
 import childProcess from 'child_process';
+import debug from 'debug';
 import fs from 'fs';
 import path from 'path';
 
@@ -13,6 +14,8 @@ const ENCODINGS = {
   '.vmat': 'utf8',
 };
 
+const log = debug('vrf:exec');
+
 // Integration layer with Valve's Source 2 resource parser and decompiler
 // See: https://github.com/SteamDatabase/ValveResourceFormat/
 class ValveResourceFormat {
@@ -23,6 +26,7 @@ class ValveResourceFormat {
   }
 
   execute(args, { maxBuffer = undefined } = {}) {
+    log(this.decompilerPath, ...args);
     // TODO: Async support
     const output = childProcess.execFileSync(this.decompilerPath, args, {
       encoding: 'utf8',
