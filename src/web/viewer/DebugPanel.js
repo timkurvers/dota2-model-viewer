@@ -27,24 +27,24 @@ class DebugPanel {
     this.spotlightFolder = this.gui.addFolder('Spotlight');
     this.spotlightFolder.add(state.lights.spotlight, 'visible');
     this.spotlightFolder.addColor(state.lights.spotlight.color, 'value');
-    this.spotlightFolder.add(state.lights.spotlight.position, 'x', -500, 500, 1);
-    this.spotlightFolder.add(state.lights.spotlight.position, 'y', -500, 500, 1);
-    this.spotlightFolder.add(state.lights.spotlight.position, 'z', -500, 500, 1);
-    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rX', 0, 360, 1);
-    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rY', 0, 360, 1);
-    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rZ', 0, 360, 1);
+    this.spotlightFolder.add(state.lights.spotlight.position, 'x', -500, 500, 0.1);
+    this.spotlightFolder.add(state.lights.spotlight.position, 'y', -500, 500, 0.1);
+    this.spotlightFolder.add(state.lights.spotlight.position, 'z', -500, 500, 0.1);
+    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rX', 0, 360, 0.1);
+    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rY', 0, 360, 0.1);
+    this.spotlightFolder.add(state.lights.spotlight.rotation, 'rZ', 0, 360, 0.1);
     this.spotlightFolder.add(state.lights.spotlight, 'scale', 0, 10, 0.1).name('scale (unused)');
-    this.spotlightFolder.add(state.lights.spotlight, 'fov', 0, 200, 1);
+    this.spotlightFolder.add(state.lights.spotlight, 'fov', 0, 200, 0.1);
 
     this.cameraFolder = this.gui.addFolder('Portrait Camera');
-    this.cameraFolder.add(state.camera.position, 'x', -500, 500, 1);
-    this.cameraFolder.add(state.camera.position, 'y', -500, 500, 1);
-    this.cameraFolder.add(state.camera.position, 'z', -500, 500, 1);
-    this.cameraFolder.add(state.camera.rotation, 'rX', 0, 360, 1);
-    this.cameraFolder.add(state.camera.rotation, 'rY', 0, 360, 1);
-    this.cameraFolder.add(state.camera.rotation, 'rZ', 0, 360, 1);
-    this.cameraFolder.add(state.camera, 'fov', 0, 200, 1);
-    this.cameraFolder.add(state.camera, 'far', 0, 3000, 1);
+    this.cameraFolder.add(state.camera.position, 'x', -500, 500, 0.1);
+    this.cameraFolder.add(state.camera.position, 'y', -500, 500, 0.1);
+    this.cameraFolder.add(state.camera.position, 'z', -500, 500, 0.1);
+    this.cameraFolder.add(state.camera.rotation, 'rX', 0, 360, 0.1);
+    this.cameraFolder.add(state.camera.rotation, 'rY', 0, 360, 0.1);
+    this.cameraFolder.add(state.camera.rotation, 'rZ', 0, 360, 0.1);
+    this.cameraFolder.add(state.camera, 'fov', 0, 200, 0.1);
+    this.cameraFolder.add(state.camera, 'far', 0, 3000, 0.1);
     this.cameraFolder.add(state.camera, 'near', 0, 80, 0.1);
   }
 }
