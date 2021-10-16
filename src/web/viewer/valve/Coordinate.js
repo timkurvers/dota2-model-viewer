@@ -14,9 +14,9 @@ class Coordinate {
 
   get normalized() {
     return [
-      this.x * INCHES_TO_METERS,
+      this.y * INCHES_TO_METERS,
       this.z * INCHES_TO_METERS,
-      -this.y * INCHES_TO_METERS,
+      this.x * INCHES_TO_METERS,
     ];
   }
 

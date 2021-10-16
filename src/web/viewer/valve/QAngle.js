@@ -15,7 +15,7 @@ class QAngle {
   get normalized() {
     return [
       -this.rX * DEGREES_TO_RADIANS,
-      (this.rY - 90) * DEGREES_TO_RADIANS,
+      (this.rY - 180) * DEGREES_TO_RADIANS,
       -this.rZ * DEGREES_TO_RADIANS,
     ];
   }
