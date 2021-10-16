@@ -128,7 +128,7 @@ reaction(() => state.model.animate, (animate) => {
   } else {
     clock.stop();
   }
-});
+}, { fireImmediately: true });
 
 reaction(() => state.model.portrait, (portrait) => {
   if (portrait) {
