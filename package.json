@@ -20,7 +20,7 @@
     "mobx": "^6.1.4",
     "morgan": "^1.10.0",
     "puppeteer": "^7.0.1",
-    "three": "^0.133.1",
+    "three": "^0.137.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
