@@ -88,8 +88,8 @@ yargs(hideBin(process.argv))
       .example('$0 batch entries.txt -- -w 235 -h 272 --no-headless')
       .epilogue(stripIndent`
         Batch file text format:
-          model=models/creeps/roshan/roshan.vmdl: roshan.png
-          model=models/creeps/roshan/roshan.vmdl&portrait: roshan-portrait.png
+          roshan.jpg: model=models/creeps/roshan/roshan.vmdl
+          roshan-portrait.png: model=models/creeps/roshan/roshan.vmdl&portrait
       `);
   }, (yargv) => {
     const options = yargv;
@@ -97,7 +97,11 @@ yargs(hideBin(process.argv))
     const entries = fs.readFileSync(options.file, 'utf8').trim().split(/\r?\n/);
     return withPuppeteer(async (page) => {
       for (const entry of entries) {
-        const [params, outfile] = entry.trim().split(/:\s+/);
+        const line = entry.trim();
+        if (!line) {
+          continue;
+        }
+        const [outfile, params] = line.split(/:\s+/);
         options.params = params;
         options.output = path.join(output, outfile);
         await screenshot(page, options);

@@ -120,8 +120,8 @@ To quickly find portraits for various units, use the pre-made portrait pages:
 To easily screenshot multiple models, create a batch-file:
 
 ```
-model=models/creeps/roshan/roshan.vmdl: roshan.png
-model=models/courier/navi_courier/navi_courier_flying.vmdl&portrait: navi-courier.png
+roshan.png: model=models/creeps/roshan/roshan.vmdl
+navi-courier.png: model=models/courier/navi_courier/navi_courier_flying.vmdl&portrait
 ```
 
 Now pass this file as an argument to the bundled screenshot-command:

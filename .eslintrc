@@ -9,6 +9,7 @@
   "rules": {
     "import/extensions": ["error", "always"],
     "no-bitwise": "off",
+    "no-continue": "off",
     "no-plusplus": "off",
     "no-restricted-syntax": "off"
   }
