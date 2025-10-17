@@ -16,9 +16,9 @@
   "dependencies": {
     "dat.gui": "^0.7.7",
     "debug": "^4.3.2",
-    "express": "^4.17.3",
+    "express": "^4.21.2",
     "mobx": "^6.1.4",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.1",
     "puppeteer": "^13.5.1",
     "three": "^0.133.1",
     "yargs": "^16.2.0"
@@ -29,12 +29,15 @@
     "@timkurvers/eslint-config": "^2.1.0",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
-    "html-webpack-plugin": "^4.5.1",
+    "eslint-plugin-import": "^2.32.0",
+    "html-webpack-plugin": "^4.5.2",
     "husky": "^4.3.8",
     "nodemon": "^2.0.20",
-    "webpack": "^5.19.0",
+    "webpack": "^5.102.1",
     "webpack-cli": "^4.4.0",
     "webpack-dev-middleware": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.x"
   }
 }

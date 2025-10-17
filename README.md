@@ -1,6 +1,6 @@
 # Dota 2 Model Viewer
 
-![Node Version](https://badgen.net/badge/node/14+/green)
+![Node Version](https://badgen.net/badge/node/22+/green)
 
 A web-based model viewer for Dota 2 with additional support for rendering
 portrait images, normally shown in the bottom part of the HUD on selection.
@@ -33,7 +33,7 @@ For simplicity's sake the pipeline server also serves up the web client from the
    git clone git://github.com/timkurvers/dota2-model-viewer.git
    ```
 
-2. Download and install [Node.js] 14+ for your platform.
+2. Download and install [Node.js] 22+ for your platform.
 
 3. Install dependencies:
 
